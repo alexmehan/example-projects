@@ -9,6 +9,7 @@ import Die from './components/yahtzee/Die'
 import PublicHolidays from './components/public-holidays/PublicHolidays'
 import Accordion from './components/accordion/Accordion'
 import { accordionData } from './components/accordion/accordion-data'
+import ToDo from './components/todo/ToDo'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -23,6 +24,7 @@ function App() {
       <Die /> */}
       <PublicHolidays />
       <Accordion items={accordionData}/>
+      <ToDo />
     </>
   )
 }
