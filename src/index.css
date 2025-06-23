@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+#explanation a {
+  text-decoration: underline;
+}
