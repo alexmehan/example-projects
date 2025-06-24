@@ -12,9 +12,10 @@ export default function MemoryGame() {
             cardArray[card2] = temp
             //[cardArray[card1], cardArray[card2]] = [cardArray[card2], cardArray[card1]]
         }
-        const updatedCardArray = cardArray.map((card) => {
+        const updatedCardArray = cardArray.map((card, index) => {
 
             const cardDetails = {
+                id: index,
                 image: card,
                 flipped: false,
                 matched: false
@@ -27,11 +28,25 @@ export default function MemoryGame() {
     })
 
     function handleClick(cardIndex) {
-        setGameCards(prev => prev.map((card, index) => (
-            index === cardIndex ? {...card, flipped: !card.flipped} : card
-        )))
+        const alreadyFlipped = gameCards.find(c => c.flipped && !c.matched)
+        const flipped = gameCards.find((x, index) => index === cardIndex)
+        const match = alreadyFlipped ? alreadyFlipped.image === flipped.image : false
+        setGameCards(prev => prev.map((card, index) => {
+            if (alreadyFlipped) {
+                return match ? 
+                    index === cardIndex || index === alreadyFlipped.id ? 
+                    {...card, flipped: true, matched: true} : 
+                    card
+                :
+                index === cardIndex || index === alreadyFlipped.id ? {...card, flipped: false} : card
+            }
+            else {
+                return index === cardIndex ? {...card, flipped: !card.flipped} : card
+            }
+
+        
+        }))
     }
-    
     const cards = gameCards.map((card, index) => (
         <div className="w-[275px] h-[275px] mx-auto overflow-hidden">
             {card.flipped ? 
@@ -50,3 +65,5 @@ export default function MemoryGame() {
         </section>
     )
 }
+
+        
