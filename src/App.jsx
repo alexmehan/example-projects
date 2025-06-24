@@ -10,6 +10,7 @@ import PublicHolidays from './components/public-holidays/PublicHolidays'
 import Accordion from './components/accordion/Accordion'
 import { accordionData } from './components/accordion/accordion-data'
 import ToDo from './components/todo/ToDo'
+import MemoryGame from './components/memory-game/MemoryGame'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -25,6 +26,7 @@ function App() {
       <PublicHolidays />
       <Accordion items={accordionData}/>
       <ToDo />
+      <MemoryGame />
     </>
   )
 }
