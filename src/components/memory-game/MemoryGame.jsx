@@ -4,27 +4,42 @@ import { images } from "./images";
 export default function MemoryGame() {
     const [gameCards, setGameCards] = useState(() => {
         let cardArray = [...images, ...images]
-        let card1
-        let card2 
         for (let x = 0; x < cardArray.length; x++) {
-            card1 = Math.floor(Math.random() * cardArray.length)
-            card2 = Math.floor(Math.random() * cardArray.length)
-            console.log(card1 + " " + card2)
+            let card1 = Math.floor(Math.random() * cardArray.length)
+            let card2 = Math.floor(Math.random() * cardArray.length)
             let temp = cardArray[card1]
             cardArray[card1] = cardArray[card2]
             cardArray[card2] = temp
             //[cardArray[card1], cardArray[card2]] = [cardArray[card2], cardArray[card1]]
         }
-        return cardArray
+        const updatedCardArray = cardArray.map((card) => {
+
+            const cardDetails = {
+                image: card,
+                flipped: false,
+                matched: false
+            }
+
+            return cardDetails
+        })
+        return updatedCardArray
         
     })
-    console.log(gameCards)
-    let cards = []
-    for (let x = 0; x < 12; x++) {
-        cards.push(
-            <div key={x} className="bg-gray-500 w-[250px] h-[250px] mx-auto"></div>
-        )
+
+    function handleClick(cardIndex) {
+        setGameCards(prev => prev.map((card, index) => (
+            index === cardIndex ? {...card, flipped: !card.flipped} : card
+        )))
     }
+    
+    const cards = gameCards.map((card, index) => (
+        <div className="w-[275px] h-[275px] mx-auto overflow-hidden">
+            {card.flipped ? 
+                <img src={card.image} className="object-cover w-full h-full" /> :
+                <div key={index} onClick={() => handleClick(index)} className="bg-gray-500 w-full h-full"></div>
+            }
+        </div>
+    ))
     return (
         <section className="py-8 border-b border-black">
             <h2 className="font-extrabold text-4xl mb-4 text-center">Memory Game</h2>
