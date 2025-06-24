@@ -1,7 +1,14 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 export default function ToDo() {
-    const [toDoItems, setToDoItems] = useState([])
+    const [toDoItems, setToDoItems] = useState(() => {
+        const items = JSON.parse(localStorage.getItem('toDoItems'))
+        return items ? items : []
+    })
+
+    useEffect(() => {
+        localStorage.setItem('toDoItems', JSON.stringify(toDoItems))
+    }, [toDoItems])
 
     function updateToDo(formData) {
         const item = formData.get('todo')
@@ -14,8 +21,6 @@ export default function ToDo() {
             item.id === itemId ? {...item, done: !item.done} : item
         )))
     }
-
-    console.log(toDoItems)
 
     const toDoList = toDoItems.map(item => (
         <li>
