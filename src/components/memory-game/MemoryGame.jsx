@@ -2,6 +2,7 @@ import { useState } from "react";
 import { images } from "./images";
 
 export default function MemoryGame() {
+    const [turns, setTurns] = useState(0)
     const [gameCards, setGameCards] = useState(() => {
         let cardArray = [...images, ...images]
         for (let x = 0; x < cardArray.length; x++) {
@@ -38,7 +39,7 @@ export default function MemoryGame() {
                     {...card, flipped: true, matched: true} : 
                     card
                 :
-                index === cardIndex || index === alreadyFlipped.id ? {...card, flipped: false} : card
+                index === cardIndex || index === alreadyFlipped.id ? {...card, flipped: card} : card
             }
             else {
                 return index === cardIndex ? {...card, flipped: !card.flipped} : card
@@ -46,6 +47,7 @@ export default function MemoryGame() {
 
         
         }))
+        setTurns(prev => prev + 1)
     }
     const cards = gameCards.map((card, index) => (
         <div className="w-[275px] h-[275px] mx-auto overflow-hidden">
@@ -58,7 +60,7 @@ export default function MemoryGame() {
     return (
         <section className="py-8 border-b border-black">
             <h2 className="font-extrabold text-4xl mb-4 text-center">Memory Game</h2>
-
+            <p>Turns: {turns}</p>
             <div className="game-board grid grid-cols-4 gap-4 justify-center">
                 {cards}
             </div>
