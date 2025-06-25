@@ -11,6 +11,7 @@ import Accordion from './components/accordion/Accordion'
 import { accordionData } from './components/accordion/accordion-data'
 import ToDo from './components/todo/ToDo'
 import MemoryGame from './components/memory-game/MemoryGame'
+import HackerNews from './components/hacker-news/HackerNews'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -27,6 +28,7 @@ function App() {
       <Accordion items={accordionData}/>
       <ToDo />
       <MemoryGame />
+      <HackerNews />
     </>
   )
 }
