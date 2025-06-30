@@ -4,6 +4,7 @@ import { useDroppable } from "@dnd-kit/core"
 
 import Draggable from './Draggable'
 import Droppable from './Droppable'
+import Delete from "./Delete"
 
 export default function ToDo() {
     const [toDoItems, setToDoItems] = useState(() => {
@@ -50,7 +51,9 @@ export default function ToDo() {
         const {over, active} = event
         // If the item is dropped over a container, set it as the parent
         // otherwise reset the parent to `null`
-        console.log(event)
+        over.id === "delete" ? 
+        setToDoItems(prev => prev.filter(item => active.id !== item.id ))
+        :
         setToDoItems(prev => prev.map((item) => (
             active.id === item.id ? {...item, status: over.id} : item
         )))
@@ -62,6 +65,8 @@ export default function ToDo() {
             {item.text}
         </li>
     ))
+
+    console.log(toDoItems)
 
     const containers = droppableContainers.map((container) => {
         const toDos = toDoItems.filter((i) => i.status === container.id)
@@ -87,8 +92,11 @@ export default function ToDo() {
             </ul>
             
             <DndContext onDragEnd={handleDragEnd}>
-                <div className="flex items-stretch w-full gap-36">
+                <div className="flex items-stretch w-full gap-36 mb-8">
                     {containers}
+                </div>
+                <div className="">
+                    <Delete />
                 </div>
             </DndContext>
             
