@@ -12,6 +12,7 @@ import { accordionData } from './components/accordion/accordion-data'
 import ToDo from './components/todo/ToDo'
 import MemoryGame from './components/memory-game/MemoryGame'
 import HackerNews from './components/hacker-news/HackerNews'
+import MovieSearch from './components/movie-search/MovieSearch'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -29,6 +30,7 @@ function App() {
       <ToDo />
       <MemoryGame />
       <HackerNews />
+      <MovieSearch />
     </>
   )
 }
