@@ -14,6 +14,7 @@ import MemoryGame from './components/memory-game/MemoryGame'
 import HackerNews from './components/hacker-news/HackerNews'
 import MovieSearch from './components/movie-search/MovieSearch'
 import Timer from './components/timer/Timer'
+import ContactBook from './components/contact-book/ContactBook'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -33,6 +34,7 @@ function App() {
       <HackerNews />
       <MovieSearch />
       <Timer />
+      <ContactBook />
     </>
   )
 }
