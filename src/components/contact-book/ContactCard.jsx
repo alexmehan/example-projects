@@ -30,31 +30,29 @@ export default function ContactCard(props) {
         <div className="shadow-md rounded-md p-8 border border-gray-300">
             
             {
-                !props.currentlyEditing ? (
+                props.currentlyEditing !== props.id ? (
                     <>
-                    <div className="flex flex-col flex-wrap">
+                    <div className="flex flex-col flex-wrap min-h-[120px]">
                         <span className="text-lg font-bold">{props.name}</span>
                         <span>{props.city}</span>
                     </div>
                     <div className="flex justify-end">
-                        <button className="bg-gray-200 px-3 py-2 mx-4" onClick={handleEdit}>Edit</button>
+                        <button className="bg-gray-200 px-3 py-2" onClick={handleEdit}>Edit</button>
                     </div>
                     </>
                 )
                 : (
                     <>
-                        <form id="contact-details" onSubmit={(e) => {e.preventDefault()
-                            updateContact()
-                        }}>
-                            
-                            <input type="text" name="name" placeholder="name" className="border mb-2 px-3 py-2 w-full" onChange={(e) => setName(e.target.value)} value={name}/>
-                            <input type="text" name="city" placeholder="city" className="border mb-4 px-3 py-2 w-full" onChange={(e) => setCity(e.target.value)} value={city}/>
-                        
+                        <form action={updateContact}>
+                            <div className="min-h-[120px]">
+                                <input type="text" name="name" placeholder="name" className="border mb-2 px-3 py-2 w-full" onChange={(e) => setName(e.target.value)} value={name}/>
+                                <input type="text" name="city" placeholder="city" className="border mb-4 px-3 py-2 w-full" onChange={(e) => setCity(e.target.value)} value={city}/>
+                            </div>
                         <div className="flex justify-between">
-                                <button type="button" className="px-3 py-2 bg-red-400" onClick={handleDelete}>Delete</button>
+                                <button type="button" className="text-white px-3 py-2 bg-red-400" onClick={handleDelete}>Delete</button>
                             <div>
                                 <button type="button" className="bg-gray-200 px-3 py-2 mx-4" onClick={handleClose}>Close</button>
-                                <button type="submit" className="text-white bg-indigo-500 px-3 py-2" form="contact-details">Save</button>
+                                <button type="submit" className="text-white bg-indigo-500 px-3 py-2">Save</button>
                             </div>
                         </div>
                         </form>
